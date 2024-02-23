@@ -1,0 +1,25 @@
+{
+  "name": "audiolibrary",
+  "version": "1.0.0",
+  "description": "Node Assignment 1 for Eurisko Academy 2024",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ralphyared/AudioLibrary.git"
+  },
+  "author": "Ralph Yared",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ralphyared/AudioLibrary/issues"
+  },
+  "homepage": "https://github.com/ralphyared/AudioLibrary#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.2.0"
+  }
+}
