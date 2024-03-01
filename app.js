@@ -1,28 +1,35 @@
+import express from "express";
 import mongoose from "mongoose";
 
-import databaseURL from "./config/config.js";
-import { addCategory } from "./features/categories/category.service.js";
+import databaseURL from "./src/config/config.js";
+import { addCategory } from "./src/features/categories/category.service.js";
 import {
   addAlbum,
   deleteAlbum,
   setTrackDateToAlbum,
-} from "./features/albums/album.service.js";
+} from "./src/features/albums/album.service.js";
 import {
   addTrack,
   deleteTracks,
   findTrackIdsbyAlbumId,
   findLastTrackAddedToAlbum,
-} from "./features/tracks/track.service.js";
+} from "./src/features/tracks/track.service.js";
+
+const app = express();
 
 const connectDB = async () => {
   await mongoose.connect(databaseURL);
 };
+
+// app.use("/category");
 
 try {
   connectDB();
 } catch (err) {
   throw err;
 }
+
+app.listen(3000);
 
 const testCase = async () => {
   const categoryPopId = await addCategory(
@@ -60,4 +67,4 @@ const testCase = async () => {
   await deleteTracks([lastTrack]);
 };
 
-testCase();
+// testCase();

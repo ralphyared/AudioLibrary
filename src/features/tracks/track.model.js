@@ -6,8 +6,8 @@ const trackSchema = new Schema(
   {
     name: String,
     singer: String,
-    category: Schema.Types.ObjectId,
-    album: Schema.Types.ObjectId,
+    categoryId: { type: Schema.Types.ObjectId, ref: "Category" },
+    albumId: { type: Schema.Types.ObjectId, ref: "Album" },
   },
   { timestamps: true }
 );

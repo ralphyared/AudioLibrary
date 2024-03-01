@@ -4,15 +4,15 @@ const addTrack = async (name, singer, categoryId, albumId) => {
   const track = new Track({
     name: name,
     singer: singer,
-    category: categoryId,
-    album: albumId,
+    categoryId: categoryId,
+    albumId: albumId,
   });
   await track.save();
 };
 
 const findTrackIdsbyAlbumId = async (albumId) => {
   const trackIds = [];
-  const results = await Track.find({ album: albumId }, { _id: 1 });
+  const results = await Track.find({ albumId: albumId }, { _id: 1 });
   results.map((result) => {
     trackIds.push(result._id);
   });
@@ -20,7 +20,7 @@ const findTrackIdsbyAlbumId = async (albumId) => {
 };
 
 const findLastTrackAddedToAlbum = async (albumId) => {
-  const tracks = await Track.find({ album: albumId }, { createdAt: 1 }).sort({
+  const tracks = await Track.find({ albumId: albumId }, { createdAt: 1 }).sort({
     createdAt: -1,
   });
   return tracks[0]?._id;
