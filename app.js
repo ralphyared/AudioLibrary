@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import bodyParser from "body-parser";
 
 import databaseURL from "./src/config/config.js";
 import { addCategory } from "./src/features/categories/category.service.js";
@@ -15,13 +16,17 @@ import {
   findLastTrackAddedToAlbum,
 } from "./src/features/tracks/track.service.js";
 
+import categoryRoutes from "./src/features/categories/category.route.js";
+
 const app = express();
 
 const connectDB = async () => {
   await mongoose.connect(databaseURL);
 };
 
-// app.use("/category");
+app.use(bodyParser.json());
+
+app.use("/category", categoryRoutes);
 
 try {
   connectDB();
