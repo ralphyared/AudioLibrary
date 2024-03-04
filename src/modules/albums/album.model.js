@@ -8,6 +8,8 @@ const albumSchema = new Schema(
     description: String,
     showNbTracks: Boolean,
     lastSongAddedAt: Date,
+    createdBy: Schema.Types.ObjectId,
+    updatedBy: Schema.Types.ObjectId,
   },
   { timestamps: true }
 );

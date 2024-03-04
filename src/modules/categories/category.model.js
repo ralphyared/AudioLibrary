@@ -6,6 +6,7 @@ const categorySchema = new Schema(
   {
     name: String,
     description: String,
+    createdBy: Schema.Types.ObjectId,
   },
   { timestamps: true }
 );

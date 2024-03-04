@@ -2,21 +2,24 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 
-import databaseURL from "./src/config/config.js";
-import { addCategory } from "./src/features/categories/category.service.js";
+import { databaseURL, port } from "./src/config/config.js";
+import { addCategory } from "./src/modules/categories/category.service.js";
 import {
   addAlbum,
   deleteAlbum,
   setTrackDateToAlbum,
-} from "./src/features/albums/album.service.js";
+} from "./src/modules/albums/album.service.js";
 import {
   addTrack,
   deleteTracks,
   findTrackIdsbyAlbumId,
   findLastTrackAddedToAlbum,
-} from "./src/features/tracks/track.service.js";
+} from "./src/modules/tracks/track.service.js";
 
-import categoryRoutes from "./src/features/categories/category.route.js";
+import categoryRoutes from "./src/modules/categories/category.routes.js";
+import albumRoutes from "./src/modules/albums/album.routes.js";
+import trackRoutes from "./src/modules/tracks/track.routes.js";
+import userRoutes from "./src/modules/user/user.routes.js";
 
 const app = express();
 
@@ -28,13 +31,28 @@ app.use(bodyParser.json());
 
 app.use("/category", categoryRoutes);
 
+app.use("/album", albumRoutes);
+
+app.use("/track", trackRoutes);
+
+app.use("/user", userRoutes);
+
+app.use((error, req, res, next) => {
+  const status = error.statusCode || 500;
+  const messages = status == 400 ? error.messages : [error.message];
+  res.status(status).send({ messages });
+});
+
 try {
   connectDB();
+  console.log("App successfully connected to database");
 } catch (err) {
   throw err;
 }
 
-app.listen(3000);
+app.listen(port, () => {
+  console.log(`App listening at port ${port}`);
+});
 
 const testCase = async () => {
   const categoryPopId = await addCategory(

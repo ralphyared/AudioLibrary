@@ -8,9 +8,13 @@ const userSchema = new Schema(
     email: String,
     password: String,
     dateOfBirth: Date,
-    location: String,
+    registrationDate: Date,
+    location: {
+      latitude: Number,
+      longitude: Number,
+    },
   },
-  { timestamps: { createdAt: "registrationDate" } }
+  { timestamps: true }
 );
 
 export default mongoose.model("User", userSchema);
